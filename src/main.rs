@@ -2,9 +2,9 @@ use std::io;
 
 
 fn main() {
-    let mut line1 = vec!['x', 'x', 'x'];
-    let mut line2 = ["x ", "x ", "x "];
-    let mut line3 = ["x ", "x ", "x "];
+    let mut line1 = ['x', 'x', 'x'];
+    let mut line2 = ['x', 'x', 'x'];
+    let mut line3 = ['x', 'x', 'x'];
     /*
     let mut line1 = ['x', 'x', 'x'];
     let mut line2 = ["x ", "x ", "x "];
@@ -20,7 +20,7 @@ fn main() {
         break
     }
 }
-fn print_field(line1: Vec<char>){
+fn print_field(line1: [char; 3]){
     for line1 in &line1{
         println!("{}", line1)
     }

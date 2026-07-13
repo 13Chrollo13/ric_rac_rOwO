@@ -1,13 +1,21 @@
+use std::collections::HashMap;
 use std::io;
-
+// 9 wahrscheinlichkeiten 3 waargerechte 3 senkrechte 2 diagonale
 
 fn main() {
     let mut runden_score = 1;
     let mut line1 = ['x', 'x', 'x'];
     let mut line2 = ['x', 'x', 'x'];
     let mut line3 = ['x', 'x', 'x'];
+
+    let mut exist_check:HashMap<i32, i32> = HashMap::new();
+
+
+    /*
     let mut vec_roe:Vec<i32> = vec![];
     let mut vec_collum:Vec<i32> = vec![];
+
+     */
     //println!("   1 2 3 \n 1 x x x \n 2 x x x  \n 3 x x x ");
 
     loop {
@@ -28,13 +36,16 @@ fn main() {
         println!("gib deine spalte ein");//wo im array
         let spalte = userinput_i32();
 
-        if vec_roe.contains(&zeile) && vec_collum.contains(&spalte) {
-            println!("das existiert schom");
-            zeile = 3;
+
+
+        for (roe,collum) in &exist_check  {
+              if &spalte == roe && &zeile == collum {
+                  println!("das existiert schon");
+                  zeile = 3
+              }
         }
 
-        vec_collum.push(spalte);
-        vec_roe.push(zeile);
+        exist_check.insert(spalte, zeile);
 
         let spalte_usize = spalte as usize;
         match zeile {
@@ -54,9 +65,14 @@ fn main() {
     }
 }
 fn print_field(line1: [char; 3]){
+    let mut bit_array = 0;
     for line1 in &line1{
-        print!(" {}", line1)
+        print!(" {}", line1);
+        let x :u32 = line1.clone() as u32;
+        bit_array += x;
     }
+
+    print!(" {}", bit_array);
     print!("\n")
 }
 

@@ -7,21 +7,8 @@ fn main() {
     let mut line:[[i32; 3]; 3] = [[3i32; 3]; 3];
     //[[3, 3, 3], [3, 3, 3], [3, 3, 3]]
     println!("{:?}", line);
-    /*
-    let mut line1 = ['x', 'x', 'x'];
-    let mut line2 = ['x', 'x', 'x'];
-    let mut line3 = ['x', 'x', 'x'];
-    let mut wincondition_array = [1,2,3];
-     */
 
     let mut exist_check:HashMap<i32, i32> = HashMap::new();
-
-
-    /*
-    let mut vec_roe:Vec<i32> = vec![];
-    let mut vec_collum:Vec<i32> = vec![];
-     */
-    //println!("   1 2 3 \n 1 x x x \n 2 x x x  \n 3 x x x ");
 
     loop {
         let mut zahl = 3;
@@ -63,26 +50,9 @@ fn main() {
         }
         print_field(line);
 
-        /*
-        match zeile {
-            0 => line1[spalte_usize] = buchstabe,
-            1 => line2[spalte_usize] = buchstabe,
-            2 => line3[spalte_usize] = buchstabe,
-            _=> runden_score -= 1
-        };
-
-
-        let bit1 = print_field(line); //   print_field(line1: Vec<>); das Vec braucht man nich
-        let bit2 = print_field(line2);
-        let bit3 = print_field(line3);
-
-         */
-
-
         if runden_score == 0 {
             break
         }
-        //let a = wincondition(bit1, bit2, bit3);
     }
 }
 fn print_field(line: [[i32; 3]; 3]){
@@ -102,17 +72,3 @@ fn userinput_i32() -> i32 {
     let userinput: i32 = a.parse().unwrap();
     userinput
 }
-
-//todo!("use a 3d array instead of three different")
-
-
-/*
-fn wincondition(bit1: i32, bit2: i32,bit3: i32) -> i32 {
-    if bit1 == 255 || bit1 == 357 || bit2 == 255 || bit2 == 357 || bit3 == 255 || bit3 == 357 {
-        1
-    }
-}
- U U U 255
- w w w 357
- x x x 360
- */

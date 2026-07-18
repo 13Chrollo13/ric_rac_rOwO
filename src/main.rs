@@ -29,7 +29,6 @@ fn main() {
         let spalte = userinput_i32();
 
 
-
         for (roe,collum) in &exist_check  {
               if &spalte == roe && &zeile == collum {
                   println!("das existiert schon");
@@ -39,7 +38,6 @@ fn main() {
 
         exist_check.insert(spalte, zeile);
 
-        println!("{}",line[1][2]);
         let spalte_usize = spalte as usize;
 
         match zeile {
@@ -56,14 +54,30 @@ fn main() {
     }
 }
 fn print_field(line: [[i32; 3]; 3]){
-    let mut for_runde = 0;
-    for line in &line{
-        print!(" {}", line[for_runde]);
-        for_runde += 1;
+    let mut roe_runde = 0;
+    let mut collum_runde = 0;
+    loop {
+
+     {
+        match line[roe_runde][collum_runde] {
+            1 => print!("U "),
+            2 => print!("w "),
+            _=> print!("x ")
+        }
+
+        roe_runde += 1;
+        if roe_runde%3 == 0 {
+            print!("\n");
+            collum_runde += 1;
+            roe_runde = 0
+        }
+         if collum_runde == 3 {
+         break
+         }
+     }
     }
     print!("\n")
 }
-
 
 fn userinput_i32() -> i32 {
     let mut a = String::new();
@@ -71,4 +85,9 @@ fn userinput_i32() -> i32 {
     let a = a.trim();
     let userinput: i32 = a.parse().unwrap();
     userinput
+}
+
+
+fn wincodition() {
+
 }

@@ -11,7 +11,7 @@ fn main() {
     let mut exist_check:HashMap<i32, i32> = HashMap::new();
 
     loop {
-        let mut zahl = 3;
+        let mut zahl = 0;
         runden_score += 1;
         if runden_score %2 == 0 {
             println!("player 1 ist dran");
@@ -36,7 +36,11 @@ fn main() {
               }
         }
 
+
+
         exist_check.insert(spalte, zeile);
+        println!("UwU {}", line[0 as usize][1 as usize]);
+        println!("AwA {}", line[1 as usize][0 as usize]);
 
         let spalte_usize = spalte as usize;
 
@@ -47,6 +51,7 @@ fn main() {
             _=> runden_score -= 1
         }
         print_field(line);
+        row_won(line);
 
         if runden_score == 0 {
             break
@@ -57,7 +62,6 @@ fn print_field(line: [[i32; 3]; 3]){
     let mut roe_runde = 0;
     let mut collum_runde = 0;
     loop {
-
      {
         match line[roe_runde][collum_runde] {
             1 => print!("U "),
@@ -83,11 +87,34 @@ fn userinput_i32() -> i32 {
     let mut a = String::new();
     io::stdin().read_line(&mut a).expect("failed to readline");
     let a = a.trim();
-    let userinput: i32 = a.parse().unwrap();
-    userinput
+    match a.parse() {
+        Ok(userinput) => userinput,
+        Err(err) => userinput_i32()
+    }
 }
 
 
-fn wincodition() {
+fn row_won(line: [[i32; 3]; 3]) {
+    let mut row = 0;
+    let mut collum = 0;
+    loop {
+        if line[row][0 as usize] == line[row][1 as usize] && line[row][0 as usize] == line[row][2 as usize] && line[row][0 as usize] != 3 {
+            println!("player 1 won");
 
+        }
+        if line[0 as usize][collum] == line[1 as usize][collum]&& line[0 as usize][collum] == line[2 as usize][collum] && line[0 as usize][collum] != 3 {
+            println!("player 2 won");
+
+        }
+        collum += 1;
+        if collum == 3 {
+            break
+        }
+    }
+    if line[0 as usize][0 as usize] == line[1 as usize][1 as usize ]&& line[2 as usize][2 as usize] == line[0 as usize][0 as usize] && line[0 as usize][0 as usize] != 3 {
+        println!("diagonal")
+    }
+    if line[0 as usize][2 as usize] == line[1 as usize][1 as usize ]&& line[2 as usize][0 as usize] == line[1 as usize][1 as usize] && line[1 as usize][1 as usize] != 3 {
+        println!("diagonal")
+    }
 }

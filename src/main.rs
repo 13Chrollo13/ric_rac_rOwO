@@ -7,7 +7,6 @@ fn main() {
     let mut line: [[i32; 3]; 3] = [[3i32; 3]; 3];
     //[[3, 3, 3], [3, 3, 3], [3, 3, 3]]
     println!("{:?}", line);
-
     let mut exist_check: HashMap<i32, i32> = HashMap::new();
 
     loop {
@@ -27,6 +26,8 @@ fn main() {
         println!("gib deine spalte ein"); //wo im array
         let spalte = userinput_i32();
 
+
+        //check if it exist already
         for (roe, collum) in &exist_check {
             if &spalte == roe && &zeile == collum {
                 println!("das existiert schon");
@@ -38,14 +39,14 @@ fn main() {
 
         let spalte_usize = spalte as usize;
 
+
+        //push the userinput to the array
         match zeile {
             0 => line[0][spalte_usize] = zahl,
             1 => line[1][spalte_usize] = zahl,
             2 => line[2][spalte_usize] = zahl,
             _ => runden_score -= 1,
         }
-        println!("UwU {}", line[0 as usize][1 as usize]);
-        println!("AwA {}", line[1 as usize][0 as usize]);
         print_field(line);
 
         let won = row_won(line);
@@ -65,7 +66,13 @@ fn main() {
 fn print_field(line: [[i32; 3]; 3]) {
     let mut roe_runde = 0;
     let mut collum_runde = 0;
+    let mut zeilen_nummer = 0;
+    println!("  0 1 2");
     loop {
+        if roe_runde % 3 == 0 {
+          print!("{} ", zeilen_nummer);
+            zeilen_nummer += 1;
+        }
         match line[collum_runde][roe_runde] {
             1 => print!("U "),
             2 => print!("w "),
@@ -87,7 +94,7 @@ fn print_field(line: [[i32; 3]; 3]) {
 
 fn userinput_i32() -> i32 {
     let mut a = String::new();
-    io::stdin().read_line(&mut a).expect("failed to readline"); //todo add error handling for this line
+    io::stdin().read_line(&mut a).expect("failed to readline");
     let a = a.trim();
     match a.parse() {
         Ok(userinput) => userinput,
@@ -124,12 +131,14 @@ fn row_won(line: [[i32; 3]; 3]) -> bool {
         && line[2 as usize][2 as usize] == line[0 as usize][0 as usize]
         && line[0 as usize][0 as usize] != 3
     {
+        //diagonal
         return true
     }
     if line[0 as usize][2 as usize] == line[1 as usize][1 as usize]
         && line[2 as usize][0 as usize] == line[1 as usize][1 as usize]
         && line[1 as usize][1 as usize] != 3
     {
+        //diagonal
         return true
     }
     false
